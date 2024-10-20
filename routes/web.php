@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/website/event', [EventController::class, 'sa_event_index'])->name('sa_event_index');
             Route::get('/website/event/add-events', [EventController::class, 'sp_event_create'])->name('sp.events.create');
             Route::post('/website/event/c/add-events', [EventController::class, 'sp_event_store'])->name('sp.event.post');
-            Route::delete('/website/event/d/events', [EventController::class, 'sp_event_destroy'])->name('sp.events.destroy');
+            Route::delete('/website/event/d/id?={event}', [EventController::class, 'sp_event_destroy'])->name('sp.events.destroy');
         });
     });
 });
