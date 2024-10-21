@@ -98,7 +98,7 @@
                                 <div class="col">
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-success me-3">Add Event</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-danger" onclick="cancelConfirmation()">Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +121,31 @@
 
 </div>
 
-
+<script>
+   function cancelConfirmation() {
+        swal({
+            title: 'Are you sure?',
+            text: "You haven't saved your changes. Do you want to leave this page?",
+            icon: 'warning',
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    visible: true,
+                    className: "btn btn-danger"
+                },
+                confirm: {
+                    text: "Yes, leave",
+                    className: "btn btn-success"
+                }
+            },
+            dangerMode: true,
+        }).then((willLeave) => {
+            if (willLeave) {
+                // Redirect back to the previous page
+                window.history.back();
+            }
+        });
+    }
+</script>
 
 @endsection

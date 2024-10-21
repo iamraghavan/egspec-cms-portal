@@ -63,12 +63,18 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li class="edit">
-                                                            <a href="">
-                                                                <i data-feather="edit"></i>
-                                                            </a>
+                                                            <a target="_blank" referrerpolicy="origin"
+                                                            href="{{ route('sp.events.edit') }}?id={{ $event->event_id }}&source=edit#edit-section">
+                                                             <i data-feather="edit"></i>
+                                                         </a>
+
+
+
+
+
                                                         </li>
                                                         <li class="delete">
-                                                            <form action="{{ route('sp.events.destroy') }}?id={{ $event->event_id }}" method="POST" style="display:inline;" id="delete-form-{{ $event->event_id }}">
+                                                            <form action="{{ route('sp.events.destroy', ['event' => $event->event_id]) }}" method="POST" style="display:inline;" id="delete-form-{{ $event->event_id }}">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <a href="#" onclick="confirmDelete('{{ $event->event_id }}');">
@@ -76,6 +82,7 @@
                                                                 </a>
                                                             </form>
                                                         </li>
+
                                                     </ul>
                                                 </td>
                                             </tr>

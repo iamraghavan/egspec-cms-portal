@@ -114,38 +114,65 @@ class EventController extends Controller
     }
 
 
-    public function edit(LiveEvent $event)
+    public function sp_event_edit(Request $request)
     {
-        return view('events.edit', compact('event'));
+        $eventId = $request->query('id');
+
+        $event = LiveEvent::findOrFail($eventId);
+
+        return view('admin.pages.edit-events', compact('event'));
     }
 
-    public function update(Request $request, LiveEvent $event)
+
+    // Update Event in the Database
+    public function sp_event_update(Request $request, LiveEvent $event)
     {
-        $request->validate([
+        // Validate Request
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'time' => 'required',
-            'venue' => 'required|string',
-            'event_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'venue' => 'required|string|max:255',
+            'event_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:1024', // Max size 1MB
             'department' => 'required|string',
+            'event_url' => 'nullable|url',
+            'attachment' => 'nullable|url',
         ]);
 
-        $event->title = $request->title;
-        $event->date = $request->date;
-        $event->time = $request->time;
-        $event->venue = $request->venue;
-        $event->department = $request->department;
-        $event->slug = Str::slug($request->title);
+        // Log validation results for debugging
+        Log::info('Validated event update request', $validatedData);
 
-        // Process and upload new image if provided
-        if ($request->hasFile('event_image')) {
-            $event->event_image = $this->uploadImage($request->file('event_image'));
+        try {
+            // Assign data to event model
+            $event->title = $validatedData['title'];
+            $event->date = $validatedData['date'];
+            $event->time = $validatedData['time'];
+            $event->venue = $validatedData['venue'];
+            $event->department = $validatedData['department'];
+            $event->slug = Str::slug($validatedData['title']);
+            $event->event_url = $validatedData['event_url'] ?? null;
+            $event->attachment = $validatedData['attachment'] ?? null;
+
+            // Process image if uploaded
+            if ($request->hasFile('event_image')) {
+                // Use the custom upload function to upload the image to Firebase
+                $event->event_image = $this->uploadImageToFirebase($request->file('event_image'));
+            }
+
+            // Save updated event
+            $event->save();
+
+            // Redirect with success message
+            return redirect()->route('sa_event_index')->with('success', 'Event updated successfully.');
+        } catch (\Exception $e) {
+            // Handle errors and log them for future debugging
+            Log::error('Failed to update event: ', ['error' => $e->getMessage()]);
+
+            return back()->with(['error', 'There was a problem updating the event. Please try again.']);
         }
-
-        $event->save();
-
-        return redirect()->route('sa_event_index')->with('success', 'Event updated successfully.');
     }
+
+
 
     public function sp_event_destroy(Request $request)
     {

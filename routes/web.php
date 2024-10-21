@@ -24,10 +24,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['check.role:1'])->group(function () {
         Route::prefix('cms/portal/s')->group(function () {
             Route::get('/admin', [SuperAdminController::class, 'admin'])->name('admin_dashboard');
-            Route::get('/website/event', [EventController::class, 'sa_event_index'])->name('sa_event_index');
-            Route::get('/website/event/add-events', [EventController::class, 'sp_event_create'])->name('sp.events.create');
-            Route::post('/website/event/c/add-events', [EventController::class, 'sp_event_store'])->name('sp.event.post');
-            Route::delete('/website/event/d/id?={event}', [EventController::class, 'sp_event_destroy'])->name('sp.events.destroy');
+            Route::get('/website/events', [EventController::class, 'sa_event_index'])->name('sa_event_index');
+            Route::get('/website/events/add-events', [EventController::class, 'sp_event_create'])->name('sp.events.create');
+            Route::post('/website/events/c/add-events', [EventController::class, 'sp_event_store'])->name('sp.event.post');
+            Route::delete('/website/events/d/{event}', [EventController::class, 'sp_event_destroy'])->name('sp.events.destroy');
+            Route::get('/website/events/edit-events/', [EventController::class, 'sp_event_edit'])->name('sp.events.edit');
+            Route::put('/website/events/u/{event}', [EventController::class, 'sp_event_update'])->name('sp.events.update');
         });
     });
 });
