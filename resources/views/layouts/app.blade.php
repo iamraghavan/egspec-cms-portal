@@ -126,7 +126,7 @@
       <script src="{{ asset("assets/js/scrollbar/simplebar.js") }}"></script>
       <script src="{{ asset("assets/js/scrollbar/custom.js") }}"></script>
       <!-- Sidebar jquery-->
-      <script src="{{ asset("assets/js/config.js") }}"></script>
+
       <!-- Plugins JS start-->
       <script src="{{ asset("assets/js/sidebar-menu.js") }}"></script>
       <script src="{{ asset("assets/js/sidebar-pin.js") }}"></script>
@@ -139,9 +139,16 @@
       <script src="{{ asset("assets/js/chart/apex-chart/apex-chart.js") }}"></script>
       <script src="{{ asset("assets/js/chart/apex-chart/stock-prices.js") }}"></script>
       <script src="{{ asset("assets/js/chart/apex-chart/moment.min.js") }}"></script>
-      <script src="{{ asset("assets/js/notify/bootstrap-notify.min.js") }}"></script>
+      <script src="{{ asset("assets/js/config.js") }}"></script>
       <script src="{{ asset("assets/js/dashboard/default.js") }}"></script>
-      {{-- <script src="{{ asset("assets/js/notify/index.js") }}"></script> --}}
+
+      <link rel="stylesheet" href="{{asset('assets/css/vendors/js-datatables/style.css')}}">
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.js') }}"></script>
+      <script src="{{ asset('assets/js/editor/ckeditor/adapters/jquery.js') }}"></script>
+      <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script>
+
 
       <script src="{{ asset("assets/js/datatable/datatables/jquery.dataTables.min.js") }}"></script>
       <script src="{{ asset("assets/js/owlcarousel/owl.carousel.js") }}"></script>
@@ -153,10 +160,14 @@
       <script src="{{ asset("assets/js/typeahead-search/typeahead-custom.js") }}"></script>
       <script src="{{ asset("assets/js/sweet-alert/sweetalert.min.js") }}"></script>
       <script src="{{ asset("assets/js/height-equal.js") }}"></script>
+
       <!-- Plugins JS Ends-->
       <!-- Theme js-->
       <script src="{{ asset("assets/js/script.js") }}"></script>
       {{-- <script src="{{ asset("assets/js/theme-customizer/customizer.js") }}"></script> --}}
+
+      <script src="{{asset('assets/js/js-datatables/simple-datatables@latest.js')}}"></script>
+
       <!-- Plugin used-->
    </body>
 </html>

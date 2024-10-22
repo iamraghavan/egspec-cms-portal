@@ -21,8 +21,7 @@
                             <div class="list-product-header">
                                 <div>
                                     <a class="btn btn-primary" href="{{ route('sp.events.create') }}"><i class="fa fa-plus"></i> Add Event</a>
-                                    <button class="btn btn-secondary" id="exportBtn"><i class="fa fa-download"></i> Export</button>
-                                    <button class="btn btn-info" id="importBtn"><i class="fa fa-upload"></i> Import</button>
+
                                 </div>
                             </div>
                             <div class="table-responsive custom-scrollbar">
@@ -63,15 +62,9 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li class="edit">
-                                                            <a target="_blank" referrerpolicy="origin"
-                                                            href="{{ route('sp.events.edit') }}?id={{ $event->event_id }}&source=edit#edit-section">
-                                                             <i data-feather="edit"></i>
-                                                         </a>
-
-
-
-
-
+                                                            <a target="_blank" referrerpolicy="origin" href="{{ route('sp.events.edit') }}?id={{ $event->event_id }}&source=edit#edit-section">
+                                                                <i data-feather="edit"></i>
+                                                            </a>
                                                         </li>
                                                         <li class="delete">
                                                             <form action="{{ route('sp.events.destroy', ['event' => $event->event_id]) }}" method="POST" style="display:inline;" id="delete-form-{{ $event->event_id }}">
@@ -82,7 +75,6 @@
                                                                 </a>
                                                             </form>
                                                         </li>
-
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -90,10 +82,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="datatable-bottom">
+                            {{-- <div class="datatable-bottom">
                                 <div class="datatable-info">Showing {{ $events->firstItem() }} to {{ $events->lastItem() }} of {{ $events->total() }} entries</div>
                                 {{ $events->links() }}
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -103,43 +95,6 @@
         <x-footer/>
 
 
-        <script>
-
-
-            function confirmDelete(eventId) {
-                swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this event!",
-                    icon: "warning",
-                    buttons: {
-                        cancel: "Cancel",
-                        confirm: {
-                            text: "Delete",
-                            value: true,
-                            closeModal: true
-                        }
-                    },
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        document.getElementById('delete-form-' + eventId).submit();
-                    }
-                });
-            }
-
-            // Handle export button
-            $('#exportBtn').on('click', function() {
-                // Implement export logic here
-                alert('export feature is not yet implemented.');
-            });
-
-            // Handle import button
-            $('#importBtn').on('click', function() {
-                // Implement import logic here
-                // You may want to open a modal for file upload
-                alert('Import feature is not yet implemented.');
-            });
-        </script>
 
     @endsection
 

@@ -15,7 +15,7 @@
                     @elseif (Auth::user()->hasRole('staff'))
                         <a href="{{ route('staff_dashboard') }}" class="btn btn-primary">Staff Dashboard</a>
                     @else
-                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Dashboard</a>
+                        <a href="{{ route('index') }}" class="btn btn-primary">Dashboard</a>
                     @endif
                 @else
                     <h3>Welcome to EGSPEC CMS! Please login or register to continue to your Dashboard.</h3>

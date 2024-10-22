@@ -1,8 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuperAdmin\EventController;
+use App\Http\Controllers\SuperAdmin\CircularController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Foundation\Auth\EmailVerificationNotification;
 use Illuminate\Http\Request;
@@ -30,6 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('/website/events/d/{event}', [EventController::class, 'sp_event_destroy'])->name('sp.events.destroy');
             Route::get('/website/events/edit-events/', [EventController::class, 'sp_event_edit'])->name('sp.events.edit');
             Route::put('/website/events/u/{event}', [EventController::class, 'sp_event_update'])->name('sp.events.update');
+
+            // Circular
+
+            // routes/web.php
+            Route::get('/website/circulars', [CircularController::class, 'sa_circular_index'])->name('sa_circular_index');
+            Route::get('/website/circulars/add-circulars', action: [CircularController::class, 'sa_circular_create'])->name('sp.circular.create');
         });
     });
 });
@@ -38,7 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Home Route
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email'); // Create this view for email verification notice
@@ -47,7 +55,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     $request->user()->markEmailAsVerified();
 
-    return redirect()->route('dashboard'); // Redirect to dashboard after verification
+    return redirect()->route('index'); // Redirect to dashboard after verification
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Resend verification email route

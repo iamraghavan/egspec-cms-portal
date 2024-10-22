@@ -174,7 +174,7 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="{{route('sa_event_index')}}">Events</a></li>
-                            <li><a href="#">Circular</a></li>
+                            <li><a href="{{route('sa_circular_index')}}">Circular</a></li>
                             <li><a href="#">Newspaper Cutout</a></li>
                             <li><a href="#">Placement Statistics</a></li>
                             <li><a href="#">Main Page Slider</a></li>

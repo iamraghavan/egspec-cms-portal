@@ -56,7 +56,7 @@ const lastOrdersOption = {
   ],
   chart: {
     type: 'rangeBar',
-    height: 300,  
+    height: 300,
     offsetY: 13,
     toolbar: {
       show: false,
@@ -67,12 +67,12 @@ const lastOrdersOption = {
     markers: {
       width: 6,
       height: 6,
-      radius: 12, 
+      radius: 12,
     },
   },
   grid: {
     show: true,
-    borderColor: '#F5F5F5', 
+    borderColor: '#F5F5F5',
     position: 'back',
 
     xaxis: {
@@ -93,8 +93,8 @@ const lastOrdersOption = {
   plotOptions: {
     bar: {
       borderRadius: 7,
-      horizontal: false, 
-      columnWidth: '20%', 
+      horizontal: false,
+      columnWidth: '20%',
     },
   },
   dataLabels: {
@@ -111,9 +111,9 @@ const lastOrdersOption = {
           fontSize: '14px',
           fontFamily: '"Nunito Sans", sans-serif',
           fontWeight: 600,
-      }, 
+      },
 
-      formatter: (value) => { 
+      formatter: (value) => {
         return `${value}k`;
       },
     },
@@ -141,7 +141,7 @@ const lastOrdersOption = {
     axisTicks: {
       show: false,
     },
-    axisBorder: { 
+    axisBorder: {
       color: 'var(--light-bg)'
     },
   },
@@ -154,7 +154,7 @@ const lastOrdersOption = {
         },
         series: [
           {
-            data: [ 
+            data: [
               {
                 x: 'Jan',
                 y: [210, 400],
@@ -196,7 +196,7 @@ const lastOrdersOption = {
         },
         series: [
           {
-            data: [ 
+            data: [
               {
                 x: 'Jan',
                 y: [210, 400],
@@ -254,9 +254,9 @@ const lastOrdersOption = {
             align: 'right',
             minWidth: 0,
             maxWidth: 34,
-            style: { 
+            style: {
               fontSize: '14px',
-            }, 
+            },
             formatter: (value) => {
               console.log('Formatter called with value:', value);
               return `${value}k`;
@@ -286,9 +286,9 @@ const lastOrdersOption = {
             style: {
               fontSize: '13px',
             },
-          }, 
+          },
         },
-      }, 
+      },
     },
   ],
 };
@@ -323,17 +323,17 @@ const salesStatsOption = {
   plotOptions: {
     radialBar: {
       startAngle: -135,
-      endAngle: 135, 
+      endAngle: 135,
       hollow: {
         size: '75%',
         image: '../assets/images/apexchart/radial-image.png',
         imageWidth: 140,
-        imageHeight: 140,   
-        imageClipped: false,  
+        imageHeight: 140,
+        imageClipped: false,
       },
-      track: { 
+      track: {
         show: true,
-        background: 'rgba(43, 94, 94, 0.1)', 
+        background: 'rgba(43, 94, 94, 0.1)',
         strokeWidth: '97%',
         opacity: 0.4,
       },
@@ -348,12 +348,12 @@ const salesStatsOption = {
           offsetY: -10,
         },
         value: {
-          show: true, 
+          show: true,
           // ...fontCommon,
           colors: '#848789',
           fontFamily: '"Nunito Sans", sans-serif',
           fontWeight: 600,
-          fontSize: '20px', 
+          fontSize: '20px',
           color: '#292929',
           offsetY: 6,
           formatter: function (val) {
@@ -367,8 +367,8 @@ const salesStatsOption = {
   colors: ['var(--theme-default)' , 'rgba(43, 94, 94, 0.1)'],
   legend: {
     show: true,
-    position: 'bottom', 
-    // ...fontCommon, 
+    position: 'bottom',
+    // ...fontCommon,
     colors: '#848789',
     fontSize: '14px',
     fontFamily: '"Nunito Sans", sans-serif',
@@ -377,11 +377,11 @@ const salesStatsOption = {
       width: 18,
       height: 18,
       strokeWidth: 5,
-      colors: '#fff', 
+      colors: '#fff',
       strokeColors:'rgba(43, 95, 96 ,0.03)',
       radius: 20,
     },
-    onItemClick: { 
+    onItemClick: {
       toggleDataSeries: false,
     },
     onItemHover: {
@@ -396,13 +396,13 @@ const salesStatsOption = {
           height: 600,
         },
         plotOptions: {
-          radialBar: { 
+          radialBar: {
             hollow: {
               size: '70%',
               imageWidth: 110,
               imageHeight: 110,
             },
-            dataLabels: { 
+            dataLabels: {
               name: {
                 fontSize: '14px',
                 offsetY: -8,
@@ -500,8 +500,8 @@ salesStatsChartEl.render();
         data: [0, 20, 70, 25, 100, 45, 25],
       },
       {
-        name: "Order", 
-        type: "area", 
+        name: "Order",
+        type: "area",
         data: [0, 50, 40, 90, 60, 120, 150],
       },
     ],
@@ -510,7 +510,7 @@ salesStatsChartEl.render();
       type: "line",
       stacked: false,
       toolbar: {
-        show: false, 
+        show: false,
       },
       dropShadow: {
         enabled: true,
@@ -527,9 +527,9 @@ salesStatsChartEl.render();
     },
     grid: {
       show: true,
-      borderColor: "var(--chart-border)", 
+      borderColor: "var(--chart-border)",
       strokeDashArray: 0,
-      position: "back", 
+      position: "back",
       xaxis: {
         lines: {
           show: false,
@@ -554,9 +554,9 @@ salesStatsChartEl.render();
         type: "vertical",
         opacityFrom: 0.4,
         opacityTo: 0,
-        stops: [0, 100], 
+        stops: [0, 100],
       },
-    }, 
+    },
     labels: [
       "Mon",
       "Tue",
@@ -564,12 +564,12 @@ salesStatsChartEl.render();
       "Thu",
       "Fri",
       "Sat",
-      "Sun", 
+      "Sun",
     ],
     markers: {
       size: 5,
-      
-    }, 
+
+    },
     xaxis: {
       type: "category",
       tickAmount: 4,
@@ -590,7 +590,7 @@ salesStatsChartEl.render();
     },
     yaxis: {
       show: false,
-      min: 0, 
+      min: 0,
       tickAmount: 6,
       tickPlacement: "between",
     },
@@ -607,7 +607,7 @@ salesStatsChartEl.render();
           },
           series: [
             {
-              name: "Earning", 
+              name: "Earning",
               type: "area",
               data: [0, 20, 70, 25, 100],
             },
@@ -625,7 +625,7 @@ salesStatsChartEl.render();
   var chartoverview = new ApexCharts(
     document.querySelector("#orderoverview"),
     optionsoverview
-  );  
+  );
   chartoverview.render();
 
 /*=======/ Project Summary /=======*/
@@ -674,7 +674,7 @@ const groupChartOption = {
   plotOptions: {
     bar: {
       horizontal: false,
-      borderRadius: 4, 
+      borderRadius: 4,
       columnWidth: '45%',
       barHeight: '100%',
       s̶t̶a̶r̶t̶i̶n̶g̶S̶h̶a̶p̶e̶: 'rounded',
@@ -684,7 +684,7 @@ const groupChartOption = {
 
   stroke: {
     show: true,
-    width: 1, 
+    width: 1,
     colors: ['var(--recent-chart-bg)'],
   },
   tooltip: {
@@ -730,7 +730,7 @@ const groupChartOption = {
         },
         series: [
           {
-            name: 'Good', 
+            name: 'Good',
             data: [170, 250, 350, 150, 230, 120, 330, 350, 280],
           },
           {
