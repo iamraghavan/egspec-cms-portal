@@ -14,12 +14,6 @@ use Carbon\Carbon;
 
 class EventService
 {
-    protected $cloudinary;
-
-    public function __construct()
-    {
-        $this->cloudinary = new Cloudinary();
-    }
 
     public function uploadImage($image)
     {

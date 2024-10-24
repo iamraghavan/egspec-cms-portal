@@ -35,9 +35,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             // Circular
 
-            // routes/web.php
             Route::get('/website/circulars', [CircularController::class, 'sa_circular_index'])->name('sa_circular_index');
             Route::get('/website/circulars/add-circulars', action: [CircularController::class, 'sa_circular_create'])->name('sp.circular.create');
+            Route::post('/website/circulars/c/add-circulars', [CircularController::class, 'sp_circular_store'])->name('sp.circular.post');
+            Route::delete('/website/circulars/d/{circular}', [CircularController::class, 'sp_circular_destroy'])->name('sp.circular.destroy');
+            Route::get('/website/circulars/edit-circulars/', [CircularController::class, 'sp_circular_edit'])->name('sp.circular.edit');
+            Route::put('/website/circulars/u/{circular}', [CircularController::class, 'sp_circular_update'])->name('sp.circular.update');
         });
     });
 });

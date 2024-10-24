@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class LiveCircular extends Model
 {
     use HasFactory;
-    protected $table = 'live_events';
+    protected $table = 'live_circulars';
     protected $fillable = [
+        'title',
         'circular_content',
         'date',
         'circular_attachment',

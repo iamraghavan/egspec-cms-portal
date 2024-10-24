@@ -50,12 +50,3 @@ $('#importBtn').on('click', function() {
     // You may want to open a modal for file upload
     alert('Import feature is not yet implemented.');
 });
-
-$(document).ready(function() {
-    // Initialize CKEditor
-    if (!CKEDITOR.instances.circular_content) {
-        CKEDITOR.replace('circular_content', {
-            height: 300 // Example: set the height of the editor
-        });
-    }
-});

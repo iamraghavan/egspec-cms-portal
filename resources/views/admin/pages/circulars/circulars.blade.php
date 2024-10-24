@@ -21,9 +21,65 @@
                             <div class="list-product-header">
                                 <div>
                                     <a class="btn btn-primary" href="{{ route('sp.circular.create') }}">
-                                        <i class="fa fa-plus"></i> Add Event
+                                        <i class="fa fa-plus"></i> Add Circular
                                     </a>
                                 </div>
+                            </div>
+
+                            <div class="table-responsive custom-scrollbar">
+                                <table class="table display datatable" id="events-table" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Circular Title</th>
+                                            <th>Department</th>
+                                            <th>Created By</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($circulars as $index => $circular)
+                                            <tr>
+                                                <td>{{ $circulars->firstItem() + $index }}</td>
+                                                <td>{{ $circular->title }}</td>
+                                                <td>{{ $circular->department }}</td>
+                                                <td>
+                                                    @php
+                                                        $badgeClasses = [
+                                                            'super_admin' => 'badge-light-success',
+                                                            'admin' => 'badge-light-danger',
+                                                            'coordinator' => 'badge-light-warning',
+                                                            'staff' => 'badge-light-danger',
+                                                            'student' => 'badge-light-warning',
+                                                        ];
+                                                        $role = $circular->user->role->name ?? 'N/A';
+                                                        $badgeClass = $badgeClasses[$role] ?? 'badge-light-danger';
+                                                    @endphp
+                                                    <span class="badge {{ $badgeClass }}">{{ $circular->user->name ?? 'N/A' }}</span>
+                                                </td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit">
+                                                            <a target="_blank" referrerpolicy="origin" href="{{ route('sp.circular.edit') }}?id={{ $circular->circular_id }}&source=edit#edit-section">
+                                                                <i data-feather="edit"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="delete">
+                                                            <form action="{{ route('sp.circular.destroy', ['circular' => $circular->circular_id]) }}" method="POST" style="display:inline;" id="delete-form-{{ $circular->circular_id }}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a href="#" onclick="confirmDelete('{{ $circular->circular_id }}');">
+                                                                    <i data-feather="trash"></i>
+                                                                </a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
+                                </table>
                             </div>
 
                         </div>
@@ -36,47 +92,5 @@
 
     @endsection
 
-<style>
-    .circular-card {
-        border-radius: 50%;
-        overflow: hidden;
-        height: 300px; /* Adjust height as needed */
-        width: 300px; /* Adjust width as needed */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        margin: auto;
-    }
 
-    .circular-card .card-body {
-        text-align: center;
-    }
 
-    .circular-card .action {
-        margin-top: 10px;
-    }
-</style>
-
-<script>
-    function confirmDelete(eventId) {
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this event!",
-            icon: "warning",
-            buttons: {
-                cancel: "Cancel",
-                confirm: {
-                    text: "Delete",
-                    value: true,
-                    closeModal: true
-                }
-            },
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                document.getElementById('delete-form-' + eventId).submit();
-            }
-        });
-    }
-</script>

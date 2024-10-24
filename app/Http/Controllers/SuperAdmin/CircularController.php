@@ -13,39 +13,47 @@ class CircularController extends Controller
 {
     public function sa_circular_index()
     {
-        $circulars = LiveCircular::all();
+        $circulars = LiveCircular::with('user')->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.pages.circulars.circulars', compact('circulars'));
     }
 
+
     public function sa_circular_create()
     {
+
         return view('admin.pages.circulars.add-circulars');
     }
 
-    public function store(Request $request)
+    public function sp_circular_store(Request $request)
     {
         $request->validate([
+            'title' => 'required|string|min:10|max:90',
             'circular_content' => 'required',
             'date' => 'required|date',
-            'circular_attachment' => 'nullable|file|mimes:pdf',
-            'slug' => 'required|unique:live_circulars', // Update table name if necessary
+            'circular_attachment' => 'nullable|file|mimes:pdf|max:2048', // Max size 2MB
             'department' => 'required|in:COE,Principal & Administration',
-            'circular_id' => 'required|unique:live_circulars', // Update table name if necessary
-            'authorized_signature_person' => 'required',
+            'authorized_signature_person' => 'required|string',
         ]);
 
-        $circular = new LiveCircular($request->all());
+        $circular = new LiveCircular();
+        $circular->title = $request->title;
+        $circular->slug = Str::slug($request->title);
+        $circular->circular_content = $request->circular_content;
+        $circular->date = $request->date;
+        $circular->department = $request->department;
+        $circular->authorized_signature_person = $request->authorized_signature_person;
+        $circular->circular_created_by = auth()->id();
+        $circular->circular_id = 'egspec-circular' . strtolower(Str::random(8)); // Generate a unique circular ID
 
-        // Handle file upload to Firebase
+        // Handle file upload to Firebase or local storage
         if ($request->hasFile('circular_attachment')) {
             $filePath = $this->uploadToFirebase($request->file('circular_attachment'));
             $circular->circular_attachment = $filePath; // Store Firebase path
         }
 
-        $circular->circular_created_by = auth()->id();
         $circular->save();
 
-        return redirect()->route('circulars.index')->with('success', 'Circular created successfully.');
+        return redirect()->route('sa_circular_index')->with('success', 'Circular created successfully.');
     }
 
     public function edit(LiveCircular $circular) // Update here

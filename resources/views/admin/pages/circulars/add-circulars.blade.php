@@ -21,13 +21,24 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form theme-form">
-                                <form method="POST" action="" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('sp.circular.post') }}" id="circularForm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title here..." required minlength="10" maxlength="90">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
                                                 <label for="circular_content">Circular Content</label>
-    <textarea class="form-control" id="circular_content" name="circular_content" placeholder="Enter circular content here..." required spellcheck="false"></textarea>
+                                                <textarea id="circular_content" class="form-control" name="circular_content" required>{{ old('circular_content') }}</textarea>
+                                                @error('circular_content')
+                                                <span class="error-message">{{ $message }}</span>
+                                                @enderror
                                             </div>
 
 
@@ -46,7 +57,7 @@
                                                 <label for="department">Department</label>
                                                 <select name="department" id="department" class="form-select" required>
                                                     <option value="">Select Department</option>
-                                                    <option value="COE">Centre of Excellence</option>
+                                                    <option value="COE">Controller of Examination</option>
                                                     <option value="Principal & Administration">Principal & Administration</option>
                                                 </select>
                                             </div>
@@ -59,18 +70,6 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="mb-3">
-                                                <label for="slug">Slug</label>
-                                                <input class="form-control" type="text" name="slug" placeholder="Unique slug *" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="mb-3">
-                                                <label for="circular_id">Circular ID</label>
-                                                <input class="form-control" type="text" name="circular_id" placeholder="Unique circular ID *" required>
-                                            </div>
-                                        </div>
                                         <div class="col-sm-4">
                                             <div class="mb-3">
                                                 <label for="circular_attachment">Circular Attachment (max 2MB, only .pdf)</label>
@@ -88,6 +87,7 @@
                                     </div>
                                 </form>
 
+
                             </div>
                         </div>
                     </div>
@@ -103,5 +103,38 @@
 
 
 
+<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        const editor = SUNEDITOR.create('circular_content', {
+            showPathLabel: false,
+            charCounter: true,
+            maxCharCount: 720,
+            width: 'auto',
+            maxWidth: '700px',
+            height: 400,
+            minHeight: '100px',
+            maxHeight: '250px',
+            buttonList: [
+                ['undo', 'redo', 'font', 'fontSize', 'formatBlock','fontColor', 'hiliteColor', 'outdent', 'indent', 'align', 'horizontalRule', 'list', 'table','bold', 'underline', 'italic', 'strike', 'subscript', 'superscript', 'removeFormat','link',  'fullScreen', 'preview', 'print', 'save'],
+
+            ],
+            callBackSave: function(contents, isChanged) {
+                console.log(contents);
+            }
+        });
+
+        // Listen to input events on the editor
+        editor.onChange = function(contents, core) {
+            // Update the underlying textarea
+            editor.save();
+            console.log(document.getElementById("circular_content").value);
+        };
+
+        // Attach form submission handler
+        document.getElementById('circularForm').addEventListener('submit', validateForm);
+    });
+</script>
 @endsection

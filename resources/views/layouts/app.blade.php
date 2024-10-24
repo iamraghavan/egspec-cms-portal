@@ -145,19 +145,19 @@
       <link rel="stylesheet" href="{{asset('assets/css/vendors/js-datatables/style.css')}}">
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.js') }}"></script>
+      {{-- <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.js') }}"></script>
       <script src="{{ asset('assets/js/editor/ckeditor/adapters/jquery.js') }}"></script>
-      <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script>
+      <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script> --}}
 
 
       <script src="{{ asset("assets/js/datatable/datatables/jquery.dataTables.min.js") }}"></script>
       <script src="{{ asset("assets/js/owlcarousel/owl.carousel.js") }}"></script>
       <script src="{{ asset("assets/js/owlcarousel/owl-custom.js") }}"></script>
-      <script src="{{ asset("assets/js/typeahead/handlebars.js") }}"></script>
+      {{-- <script src="{{ asset("assets/js/typeahead/handlebars.js") }}"></script>
       <script src="{{ asset("assets/js/typeahead/typeahead.bundle.js") }}"></script>
       <script src="{{ asset("assets/js/typeahead/typeahead.custom.js") }}"></script>
       <script src="{{ asset("assets/js/typeahead-search/handlebars.js") }}"></script>
-      <script src="{{ asset("assets/js/typeahead-search/typeahead-custom.js") }}"></script>
+      <script src="{{ asset("assets/js/typeahead-search/typeahead-custom.js") }}"></script> --}}
       <script src="{{ asset("assets/js/sweet-alert/sweetalert.min.js") }}"></script>
       <script src="{{ asset("assets/js/height-equal.js") }}"></script>
 
