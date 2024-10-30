@@ -35,6 +35,9 @@
       <link id="color" rel="stylesheet" href="{{ asset("assets/css/color-1.css") }}" media="screen">
       <!-- Responsive css-->
       <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/responsive.css") }}">
+      <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
    </head>
    <body>
 
@@ -114,7 +117,7 @@
 
     </div>
 @endif
-
+<script src="{{asset('assets\js\raghavan_jeeva.js')}}"></script>
       <!-- latest jquery-->
       <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
       <!-- Bootstrap js-->

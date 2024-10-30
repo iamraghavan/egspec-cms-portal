@@ -56,51 +56,68 @@ class CircularController extends Controller
         return redirect()->route('sa_circular_index')->with('success', 'Circular created successfully.');
     }
 
-    public function edit(LiveCircular $circular) // Update here
+    public function sp_circular_edit(Request $request, LiveCircular $circular) // Update here
     {
-        return view('circulars.edit', compact('circular'));
+        $circularId = $request->query('id');
+        $circular = LiveCircular::where('circular_id', $circularId)->firstOrFail();
+        return view('admin.pages.circulars.edit-circulars', compact('circular'));
     }
 
-    public function update(Request $request, LiveCircular $circular) // Update here
+    public function sp_circular_update(Request $request, LiveCircular $circular)
     {
         $request->validate([
+            'title' => 'required|string|min:10|max:90',
             'circular_content' => 'required',
             'date' => 'required|date',
-            'circular_attachment' => 'nullable|file|mimes:pdf',
-            'slug' => 'required|unique:live_circulars,slug,' . $circular->id, // Update table name if necessary
+            'circular_attachment' => 'nullable|file|mimes:pdf|max:2048',
             'department' => 'required|in:COE,Principal & Administration',
-            'circular_id' => 'required|unique:live_circulars,circular_id,' . $circular->id, // Update table name if necessary
-            'authorized_signature_person' => 'required',
+            'authorized_signature_person' => 'required|string',
         ]);
 
-        $circular->fill($request->all());
+        // Manually set each attribute to ensure proper assignment
+        $circular->title = $request->title;
+        $circular->circular_content = $request->circular_content;
+        $circular->date = $request->date;
+        $circular->department = $request->department;
+        $circular->authorized_signature_person = $request->authorized_signature_person;
 
-        // Handle file upload to Firebase
+        // Handle file upload to Firebase if a new file is provided
         if ($request->hasFile('circular_attachment')) {
-            // Delete the old attachment if it exists
+            // Delete the existing file from Firebase if it exists
             if ($circular->circular_attachment) {
                 $this->deleteFromFirebase($circular->circular_attachment);
             }
+
+            // Upload the new file and store the path
             $filePath = $this->uploadToFirebase($request->file('circular_attachment'));
-            $circular->circular_attachment = $filePath; // Update Firebase path
+            $circular->circular_attachment = $filePath;
         }
 
+        // Save the changes to the database
         $circular->save();
 
-        return redirect()->route('circulars.index')->with('success', 'Circular updated successfully.');
+        // Redirect to the index page with a success message
+        return redirect()->route('sa_circular_index')->with('success', 'Circular updated successfully.');
     }
 
-    public function destroy(LiveCircular $circular) // Update here
+
+    public function sp_circular_destroy($id)
     {
-        // Delete the attachment if it exists
+        // Find the circular by the `circular_id` or throw a 404 if not found
+        $circular = LiveCircular::where('circular_id', $id)->firstOrFail();
+
+        // Delete the attachment from Firebase if it exists
         if ($circular->circular_attachment) {
             $this->deleteFromFirebase($circular->circular_attachment);
         }
 
+        // Delete the database record after deleting the attachment
         $circular->delete();
 
-        return redirect()->route('circulars.index')->with('success', 'Circular deleted successfully.');
+        // Redirect to the index page with a success message
+        return redirect()->route('sa_circular_index')->with('success', 'Circular deleted successfully.');
     }
+
 
     private function uploadToFirebase($file)
     {

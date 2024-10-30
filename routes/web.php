@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuperAdmin\EventController;
 use App\Http\Controllers\SuperAdmin\CircularController;
+use App\Http\Controllers\SuperAdmin\NewsPaperCutoutController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Foundation\Auth\EmailVerificationNotification;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('/website/circulars/d/{circular}', [CircularController::class, 'sp_circular_destroy'])->name('sp.circular.destroy');
             Route::get('/website/circulars/edit-circulars/', [CircularController::class, 'sp_circular_edit'])->name('sp.circular.edit');
             Route::put('/website/circulars/u/{circular}', [CircularController::class, 'sp_circular_update'])->name('sp.circular.update');
+
+            // Newspaper Cuts
+
+            Route::get('/website/newspaper-cuts', [NewsPaperCutoutController::class, 'sa_newspcc_index'])->name('sa_newspcc_index');
         });
     });
 });
