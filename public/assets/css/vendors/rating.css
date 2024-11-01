@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 .antennaio {
   background-image: url("${file-1x}");
   background-repeat: no-repeat;
@@ -336,7 +336,7 @@
 }
 
 .clearfix {
-  *zoom: 1;
+  zoom: 1;
 }
 
 /* Center ratings in container */

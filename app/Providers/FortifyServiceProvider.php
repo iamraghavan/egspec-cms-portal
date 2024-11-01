@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
+use App\Actions\Fortify\ResetUserPassword;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,18 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
 
+        // Forgot password request view
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.forgot-password');
+        });
 
+        // Password reset form view
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.reset-password', ['request' => $request]);
+        });
+
+
+        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         // Define user authentication logic
         Fortify::authenticateUsing(function (Request $request) {

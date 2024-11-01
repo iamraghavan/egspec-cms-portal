@@ -1,0 +1,22 @@
+/* resources/css/app.css */
+
+/* Vendor CSS */
+@import '../../public/assets/css/vendors/icofont.css';
+@import '../../public/assets/css/vendors/themify.css';
+@import '../../public/assets/css/vendors/flag-icon.css';
+@import '../../public/assets/css/vendors/feather-icon.css';
+@import '../../public/assets/css/vendors/slick.css';
+@import '../../public/assets/css/vendors/slick-theme.css';
+@import '../../public/assets/css/vendors/scrollbar.css';
+@import '../../public/assets/css/vendors/animate.css';
+@import '../../public/assets/css/vendors/datatables.css';
+
+/* Bootstrap CSS */
+@import '../../public/assets/css/vendors/bootstrap.css';
+
+/* Custom App CSS */
+@import '../../public/assets/css/style.css';
+@import '../../public/assets/css/color-1.css'; /* You can load different color themes conditionally if needed */
+
+/* Responsive CSS */
+@import '../../public/assets/css/responsive.css';

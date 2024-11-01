@@ -26,7 +26,7 @@
       <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/vendors/scrollbar.css") }}">
       <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/vendors/animate.css") }}">
       <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/vendors/datatables.css") }}">
-      <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/vendors/owlcarousel.css") }}">
+
       <!-- Plugins css Ends-->
       <!-- Bootstrap css-->
       <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/vendors/bootstrap.css") }}">
@@ -35,7 +35,6 @@
       <link id="color" rel="stylesheet" href="{{ asset("assets/css/color-1.css") }}" media="screen">
       <!-- Responsive css-->
       <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/responsive.css") }}">
-      <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
    </head>
@@ -117,9 +116,50 @@
 
     </div>
 @endif
-<script src="{{asset('assets\js\raghavan_jeeva.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+    // Check for success message
+    @if (session('success'))
+        $.notify({
+            title: 'Success!',
+            message: "{{ session('success') }}",
+            icon: 'glyphicon glyphicon-ok'
+        }, {
+            type: 'success',
+            delay: 5000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+    @endif
+
+    // Check for error message
+    @if (session('error'))
+        $.notify({
+            title: 'Error!',
+            message: "{{ session('error') }}",
+            icon: 'glyphicon glyphicon-remove'
+        }, {
+            type: 'danger',
+            delay: 5000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+    @endif
+});
+
+</script>
+
+
       <!-- latest jquery-->
       <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+
+<script src="{{ asset('assets/js/raghavan_jeeva.js') }}"></script>
+
       <!-- Bootstrap js-->
       <script src="{{ asset("assets/js/bootstrap/bootstrap.bundle.min.js") }}"></script>
       <!-- feather icon js-->
@@ -136,31 +176,15 @@
       <script src="{{ asset("assets/js/slick/slick.min.js") }}"></script>
       <script src="{{ asset("assets/js/slick/slick.js") }}"></script>
       <script src="{{ asset("assets/js/header-slick.js") }}"></script>
-      <script src="{{ asset("assets/js/chart/morris-chart/raphael.js") }}"></script>
-      <script src="{{ asset("assets/js/chart/morris-chart/morris.js") }}"> </script>
-      <script src="{{ asset("assets/js/chart/morris-chart/prettify.min.js") }}"></script>
-      <script src="{{ asset("assets/js/chart/apex-chart/apex-chart.js") }}"></script>
-      <script src="{{ asset("assets/js/chart/apex-chart/stock-prices.js") }}"></script>
-      <script src="{{ asset("assets/js/chart/apex-chart/moment.min.js") }}"></script>
-      <script src="{{ asset("assets/js/config.js") }}"></script>
-      <script src="{{ asset("assets/js/dashboard/default.js") }}"></script>
+
 
       <link rel="stylesheet" href="{{asset('assets/css/vendors/js-datatables/style.css')}}">
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      {{-- <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.js') }}"></script>
-      <script src="{{ asset('assets/js/editor/ckeditor/adapters/jquery.js') }}"></script>
-      <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script> --}}
 
 
       <script src="{{ asset("assets/js/datatable/datatables/jquery.dataTables.min.js") }}"></script>
-      <script src="{{ asset("assets/js/owlcarousel/owl.carousel.js") }}"></script>
-      <script src="{{ asset("assets/js/owlcarousel/owl-custom.js") }}"></script>
-      {{-- <script src="{{ asset("assets/js/typeahead/handlebars.js") }}"></script>
-      <script src="{{ asset("assets/js/typeahead/typeahead.bundle.js") }}"></script>
-      <script src="{{ asset("assets/js/typeahead/typeahead.custom.js") }}"></script>
-      <script src="{{ asset("assets/js/typeahead-search/handlebars.js") }}"></script>
-      <script src="{{ asset("assets/js/typeahead-search/typeahead-custom.js") }}"></script> --}}
+
       <script src="{{ asset("assets/js/sweet-alert/sweetalert.min.js") }}"></script>
       <script src="{{ asset("assets/js/height-equal.js") }}"></script>
 

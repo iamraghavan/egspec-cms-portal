@@ -20,14 +20,14 @@
                         <div class="card-body">
                             <div class="list-product-header">
                                 <div>
-                                    <a class="btn btn-primary" href="">
+                                    <a class="btn btn-primary" href="{{route('sp.newspcc.create')}}">
                                         <i class="fa fa-plus"></i> Add Newspaper Cut's
                                     </a>
                                 </div>
                             </div>
 
                             <div class="table-responsive custom-scrollbar">
-                                <table class="table display datatable" id="events-table" style="width: 100%;">
+                                <table class="table display datatable" id="newspaper-table" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
@@ -62,19 +62,21 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li class="edit">
-                                                            <a target="_blank" referrerpolicy="origin" class="btn btn-outline-info"  href=" ?id= &source=edit#view-section">
+                                                            <a target="_blank" referrerpolicy="origin" class="btn btn-outline-info "  href="{{ route('sp.newspcc.view') }}?id={{ $newspccs->id }}&source=newspaper_raghavan#view-{{$newspccs->newspaper_name}}">
                                                                 view
                                                             </a>
                                                         </li>
                                                         <li class="delete">
-                                                            <form action="" method="POST" style="display:inline;" id="delete-form-">
+                                                            <form action="{{ route('sp.newspcc.destroy', ['newspcc' => $newspccs->id]) }}" method="POST" style="display:inline;" id="delete-form-{{ $newspccs->id }}">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <a href="#" class="btn btn-outline-danger" onclick="confirmDelete('');">
+                                                                <a href="#" class="btn btn-outline-danger" onclick="confirmDelete('{{ $newspccs->id }}');">
                                                                     delete
                                                                 </a>
                                                             </form>
                                                         </li>
+
+
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -91,6 +93,8 @@
         </div>
 
         <x-footer/>
+
+
 
     @endsection
 
