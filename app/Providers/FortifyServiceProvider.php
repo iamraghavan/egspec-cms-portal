@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
 use App\Actions\Fortify\ResetUserPassword;
+use App\Mail\LoginSuccessMail;
+use Illuminate\Support\Facades\Log;
+use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\Mail;
+use Laravel\Fortify\Contracts\ConfirmPasswordViewResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -21,11 +26,11 @@ class FortifyServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
         RateLimiter::for('login', function (Request $request) {
             return Limit::perMinute(5)->by($request->email . $request->ip());
         });
 
+        Fortify::confirmPasswordView(fn(Request $request) => view('auth.confirm-password'));
 
         // Login view
         Fortify::loginView(function () {
@@ -47,7 +52,6 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.reset-password', ['request' => $request]);
         });
 
-
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         // Define user authentication logic
@@ -55,11 +59,38 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
-                return $user;
+                // Check if the user has two-factor authentication enabled
+                if ($user->two_factor_enabled) {
+                    // User has 2FA enabled; return a response indicating that 2FA is required
+                    return $user;
+                }
+
+                try {
+                    // Generate login details
+                    $agent = new Agent();
+                    $loginDetails = [
+                        'date' => now()->format('F j, Y, g:i A (T)'),
+                        'os' => $agent->platform(),
+                        'browser' => $agent->browser(),
+                        'location' => $request->ip(),
+                    ];
+
+                    // Send the email after successful login
+                    Mail::to($user->email)->send(new LoginSuccessMail($user, $loginDetails));
+                } catch (\Exception $e) {
+                    Log::error('Email not sent: ' . $e->getMessage());
+                }
+
+                return $user; // Return the user if no 2FA is required
             }
         });
 
         // Handle user creation
         Fortify::createUsersUsing(CreateNewUser::class);
+
+        // Custom two-factor challenge view
+        Fortify::twoFactorChallengeView(function () {
+            return view('auth.two-factor-challenge');
+        });
     }
 }

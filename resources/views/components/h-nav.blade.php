@@ -23,7 +23,7 @@
                     <li class="sidebar-list">
                         <i class="fa fa-thumb-tack"></i>
 
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{route('admin_dashboard')}}">
                             <svg class="stroke-icon">
                                 <use href="{{asset('assets/svg/icon-sprite.svg#stroke-home')}}"></use>
                               </svg>
@@ -54,33 +54,6 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="#">
                             <svg class="stroke-icon">
-                                <use href="{{asset('assets/svg/icon-sprite.svg#stroke-gallery')}}"></use>
-                              </svg>
-                              <svg class="fill-icon">
-                                <use href="{{asset('assets/svg/icon-sprite.svg#fill-gallery')}}"></use>
-                              </svg>
-                            <span>Gallery</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="#">Albums</a></li>
-                            <li><a href="#">Categories</a></li>
-                            <li><a href="#">Images</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link" href="#">
-                            <svg class="stroke-icon">
-                                <use href="{{asset('assets/svg/icon-sprite.svg#stroke-email')}}"></use>
-                              </svg>
-                              <svg class="fill-icon">
-                                <use href="{{asset('assets/svg/icon-sprite.svg#fill-email')}}"></use>
-                              </svg>
-                            <span>Newsletter</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="#">
-                            <svg class="stroke-icon">
                                 <use href="{{asset('assets/svg/icon-sprite.svg#stroke-to-do')}}"></use>
                               </svg>
                               <svg class="fill-icon">
@@ -96,6 +69,36 @@
                             <li><a href="#">Slider Post</a></li>
                         </ul>
                     </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="#">
+                            <svg class="stroke-icon">
+                                <use href="{{asset('assets/svg/icon-sprite.svg#stroke-gallery')}}"></use>
+                              </svg>
+                              <svg class="fill-icon">
+                                <use href="{{asset('assets/svg/icon-sprite.svg#fill-gallery')}}"></use>
+                              </svg>
+                            <span>Gallery</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="#">Albums</a></li>
+                            <li><a href="#">Categories</a></li>
+                            <li><a href="#">Images</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link" href="#">
+                            <svg class="stroke-icon">
+                                <use href="{{asset('assets/svg/icon-sprite.svg#stroke-email')}}"></use>
+                              </svg>
+                              <svg class="fill-icon">
+                                <use href="{{asset('assets/svg/icon-sprite.svg#fill-email')}}"></use>
+                              </svg>
+                            <span>Newsletter</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="#">
                             <svg class="stroke-icon">
@@ -219,7 +222,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin_profile') }}">
                             <svg class="stroke-icon">
                                 <use href="{{asset('assets/svg/icon-sprite.svg#stroke-editors')}}"></use>
                               </svg>

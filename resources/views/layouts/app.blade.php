@@ -55,6 +55,8 @@
     </script>
 @endif
 
+
+
 @if (session('success'))
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -116,6 +118,7 @@
 
     </div>
 @endif
+
 
 <script>
     $(document).ready(function () {
@@ -196,5 +199,7 @@
       <script src="{{asset('assets/js/js-datatables/simple-datatables@latest.js')}}"></script>
 
       <!-- Plugin used-->
+
+
    </body>
 </html>

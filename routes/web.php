@@ -9,6 +9,8 @@ use App\Http\Controllers\SuperAdmin\NewsPaperCutoutController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Foundation\Auth\EmailVerificationNotification;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\ConfirmPasswordController;
+
 /*
 |----------------------------------------------------------------------
 | Web Routes
@@ -23,10 +25,18 @@ use Illuminate\Http\Request;
 // Dashboard Route
 
 
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['check.role:1'])->group(function () {
         Route::prefix('cms/portal/s')->group(function () {
+
             Route::get('/admin', [SuperAdminController::class, 'admin'])->name('admin_dashboard');
+            Route::get('/admin/profile', [SuperAdminController::class, 'profile'])->name('admin_profile');
+            Route::put('/admin/profile/update', [SuperAdminController::class, 'updateProfile'])->name('admin.updateProfile');
+
+            // Events
+
             Route::get('/website/events', [EventController::class, 'sa_event_index'])->name('sa_event_index');
             Route::get('/website/events/add-events', [EventController::class, 'sp_event_create'])->name('sp.events.create');
             Route::post('/website/events/c/add-events', [EventController::class, 'sp_event_store'])->name('sp.event.post');

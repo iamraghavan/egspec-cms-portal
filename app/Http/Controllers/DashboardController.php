@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PragmaRX\Google2FA\Google2FA;
+use App\Models\User;
+use App\Http\Controllers\Controller;
+use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider;
 
 class DashboardController extends Controller
 {
@@ -22,15 +26,5 @@ class DashboardController extends Controller
         }
 
         return view('welcome', ['user' => $user]); // Default view
-    }
-
-    public function profile()
-    {
-        return view('dashboard.profile', ['user' => Auth::user()]);
-    }
-
-    public function settings()
-    {
-        return view('dashboard.settings', ['user' => Auth::user()]);
     }
 }

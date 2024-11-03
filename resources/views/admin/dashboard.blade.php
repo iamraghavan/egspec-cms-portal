@@ -25,17 +25,28 @@
                                 <div class="col-md-5 premium-course">
                                     <h1 class="f-w-700">Access a Website Effortlessly!</h1>
                                     <span class="f-light f-w-400 f-14">Dive into a seamless content management experience!</span>
-                                    <a class="btn btn-square btn-primary f-w-700" href="{{ route('create_post') }}">Create a Post</a>
+                                    <a class="btn btn-square btn-primary f-w-700" href="">Create a Post</a>
                                 </div>
 
-                                <div class="col-md-7 premium-course-img">
+                                {{-- <div class="col-md-7 premium-course-img">
                                     <div class="premium-message">
                                         <img class="img-fluid lazy" data-src="https://admin.pixelstrap.net/zono/assets/images/dashboard/massage.gif" alt="massage">
                                     </div>
                                     <div class="premium-books">
                                         <img class="img-fluid lazy" data-src="https://admin.pixelstrap.net/zono/assets/images/dashboard/books.gif" alt="books">
                                     </div>
-                                </div>
+                                </div> --}}
+
+                                {{-- <form method="POST" action="{{ route('two-factor.enable') }}">
+                                    @csrf
+                                    <button type="submit">Enable Two-Factor Authentication</button>
+                                </form>
+
+                                <form method="POST" action="{{ route('two-factor.disable') }}">
+                                    @csrf
+                                    <button type="submit">Disable Two-Factor Authentication</button>
+                                </form> --}}
+
                             </div>
                         </div>
                     </div>
@@ -43,11 +54,17 @@
             </div>
         </div>
         <!-- Container-fluid Ends-->
+        <!-- two-factor-authentication.blade.php -->
+
+
     </div>
 
     <x-footer />
 
 </div>
+
+
+
 
 @section('scripts')
     <script>

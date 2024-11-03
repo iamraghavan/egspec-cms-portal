@@ -159,7 +159,14 @@
           </li>
 
           <li class="profile-nav onhover-dropdown pe-0 py-0">
-            <div class="d-flex align-items-center profile-media"><img class="b-r-25" src="{{asset('assets/images/dashboard/profile.png')}}" alt="">
+            <div class="d-flex align-items-center profile-media">
+                <img style="width: 35px; height: 35px;" class="b-r-25" src="src="{{
+         filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL)
+             ? Auth::user()->avatar
+             : (Auth::user()->avatar
+                 ? asset(Auth::user()->avatar)
+                 : asset('assets/images/user/default-avatar.jpg'))
+     }}"" alt="{{ Auth::user()->name }}">
               <div class="flex-grow-1 user"><span>{{ Auth::user()->name }}</span>
                 <p class="mb-0 font-nunito">{{ Auth::user()->email }}
                   <svg>
@@ -169,7 +176,7 @@
               </div>
             </div>
             <ul class="profile-dropdown onhover-show-div">
-              <li><a href=""><i data-feather="user"></i><span>Account </span></a></li>
+                <li><a href="{{ route('admin_profile') }}"><i data-feather="user"></i><span>Account </span></a></li>
 
               <li><a href=""><i data-feather="settings"></i><span>Settings</span></a></li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
