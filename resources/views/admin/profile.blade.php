@@ -105,29 +105,29 @@
 
                     <hr>
 
-                    <!-- Enable/Disable Two-Factor Authentication -->
-                    @if (auth()->user()->hasEnabledTwoFactorAuthentication())
-                        <!-- Disable Two-Factor Authentication -->
-                        <form method="POST" action="/user/two-factor-authentication">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger mt-3" type="submit">Disable Two-Factor Authentication</button>
-                        </form>
+                    <!-- two-factor-authentication.blade.php -->
+<form method="POST" action="/user/two-factor-authentication">
+    @csrf
+    <button type="submit">Enable Two-Factor Authentication</button>
+</form>
 
-                        <!-- Display QR Code and Recovery Codes -->
-                        <div>
-                            <h3>Your Recovery Codes</h3>
-                            @foreach ((array) auth()->user()->recoveryCodes() as $code)
-                                <div>{{ $code }}</div>
-                            @endforeach
-                        </div>
-                    @else
-                        <!-- Enable Two-Factor Authentication -->
-                        <form method="POST" action="/user/two-factor-authentication">
-                            @csrf
-                            <button class="btn btn-primary mt-3" type="submit">Enable Two-Factor Authentication</button>
-                        </form>
-                    @endif
+@if (session('status') == 'two-factor-authentication-enabled')
+    <div>
+        {!! auth()->user()->twoFactorQrCodeSvg() !!}
+    </div>
+@endif
+
+
+@foreach ((array) auth()->user()->recoveryCodes() as $code)
+        <div>{{ $code }}</div>
+    @endforeach
+
+
+<form method="POST" action="/user/two-factor-authentication">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Disable Two-Factor Authentication</button>
+</form>
 
                     <!-- Recent Sessions Table -->
                     <h3 class="mt-5">Recent Sessions</h3>
