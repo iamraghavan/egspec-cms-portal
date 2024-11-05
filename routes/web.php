@@ -10,6 +10,7 @@ use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Foundation\Auth\EmailVerificationNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\ConfirmPasswordController;
+use App\Http\Controllers\SuperAdmin\CategoryController;
 
 /*
 |----------------------------------------------------------------------
@@ -60,6 +61,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/website/newspaper-cuts/add-newspaper-cuts', [NewsPaperCutoutController::class, 'sa_newspcc_create'])->name('sp.newspcc.create');
             Route::post('/website/newspaper-cuts/c/add-newspaper-cuts', [NewsPaperCutoutController::class, 'sp_newspcc_store'])->name('sp.newspcc.post');
             Route::delete('/website/newspaper-cuts/d/{newspcc}', [NewsPaperCutoutController::class, 'sp_newspcc_destroy'])->name('sp.newspcc.destroy');
+
+
+            // Categories
+
+            Route::get('/website/categories', [CategoryController::class, 'sa_categories_index'])->name('sa_categories_index');
         });
     });
 });

@@ -46,7 +46,7 @@
                             <span>Categories</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a href="#">Categories</a></li>
+                            <li><a href="{{route('sa_categories_index')}}">Categories</a></li>
                             <li><a href="#">Sub Categories</a></li>
                         </ul>
                     </li>
