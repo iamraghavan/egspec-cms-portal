@@ -65,7 +65,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             // Categories
 
-            Route::get('/website/categories', [CategoryController::class, 'sa_categories_index'])->name('sa_categories_index');
+
+            Route::get('/website/categories/', [CategoryController::class, 'sa_categories_index'])->name('sa_categories_index');
+            Route::post('/website/categories/c/', [CategoryController::class, 'sa_categories_post'])->name('sa_categories_post');
+            Route::get('/website/categories/add-categories', [CategoryController::class, 'sa_categories_create'])->name('sa_categories_create');
+            Route::get('/website/categories/{id}/edit', [CategoryController::class, 'sa_categories_edit'])->name('sa_categories_edit');
+            Route::put('/website/categories/u/{id}', [CategoryController::class, 'sa_categories_update'])->name('sa_categories_update');
+            Route::delete('/website/categories/d/{id}', [CategoryController::class, 'sa_categories_destroy'])->name('sa_categories_destroy');
         });
     });
 });

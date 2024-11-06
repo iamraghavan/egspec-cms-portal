@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <div class="list-product-header">
                                 <div>
-                                    <a class="btn btn-primary" href=""><i class="fa fa-plus"></i> Add Category</a>
+                                    <a class="btn btn-primary" href="{{ route('sa_categories_create') }}"><i class="fa fa-plus"></i> Add Category</a>
                                 </div>
                             </div>
                             <div class="table-responsive custom-scrollbar">
@@ -50,18 +50,23 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li class="edit">
-                                                            <a href="">
+                                                            <a href="{{ route('sa_categories_edit', $category['_id']) }}">
                                                                 <i data-feather="edit"></i>
                                                             </a>
                                                         </li>
                                                         <li class="delete">
-                                                            <form action="" method="POST" style="display:inline;" id="delete-form-">
+                                                            <form action="{{ route('sa_categories_destroy', $category['_id']) }}" method="POST" style="display:inline;" id="delete-form-{{ $category['_id'] }}">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <a href="#" onclick="confirmDelete('');">
+                                                                <a href="#" onclick="confirmDelete('{{ $category['_id'] }}');">
                                                                     <i data-feather="trash"></i>
                                                                 </a>
                                                             </form>
+                                                        </li>
+                                                        <li class="delete">
+                                                            <a href="{{ route('sa_sub_categories_index') }}">
+
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -79,5 +84,13 @@
         </div>
 
         <x-footer/>
+
+        <script>
+            function confirmDelete(_id) {
+                if (confirm('Are you sure you want to delete this category?')) {
+                    document.getElementById(`delete-form-${_id}`).submit();
+                }
+            }
+            </script>
 
 @endsection

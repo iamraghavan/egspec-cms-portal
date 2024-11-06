@@ -160,13 +160,14 @@
 
           <li class="profile-nav onhover-dropdown pe-0 py-0">
             <div class="d-flex align-items-center profile-media">
-                <img style="width: 35px; height: 35px;" class="b-r-25" src="src="{{
-         filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL)
-             ? Auth::user()->avatar
-             : (Auth::user()->avatar
-                 ? asset(Auth::user()->avatar)
-                 : asset('assets/images/user/default-avatar.jpg'))
-     }}"" alt="{{ Auth::user()->name }}">
+                <img class="lazy" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;"
+     src="{{ filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL)
+         ? Auth::user()->avatar
+         : (Auth::user()->avatar
+             ? asset(Auth::user()->avatar)
+             : asset('assets/images/user/default-avatar.jpg')) }}"
+     alt="{{ Auth::user()->name }}">
+
               <div class="flex-grow-1 user"><span>{{ Auth::user()->name }}</span>
                 <p class="mb-0 font-nunito">{{ Auth::user()->email }}
                   <svg>
